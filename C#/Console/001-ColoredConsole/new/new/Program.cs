@@ -84,7 +84,12 @@ namespace @new
             }
             Console.ReadKey();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="month"></param>
+        /// <param name="leapYear"></param>
+        /// <returns></returns>
         public static int GetNumberOfDays(int month, bool leapYear)
         {
             switch (month)
@@ -106,11 +111,11 @@ namespace @new
             }
             return 30;
         }
+
         /// <summary>
-        /// 
+        /// Parsuje datum z konzole ve formatu DD MM YYYY
         /// </summary>
-        /// <param name="text"> if null everythink is OK</param>
-        /// <returns></returns>
+        /// <returns> datum s rokem , mesicem a dnem</returns>
         public static Models.Date ParseTheDate()
         {
             // 1950 - 2050 rok
@@ -136,12 +141,16 @@ namespace @new
                 if( validationMesseges.Count == 0)
                     return new Models.Date(_year, _month, _day);
                 //pokud se chybz naskytli vypise
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Pri validaci data nastaly nasledujici chyby");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 foreach(string s in validationMesseges)
                 {
-                    Console.Write(s);
+                    
+                    Console.WriteLine(s);
                 }
-                Console.WriteLine("")
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("zadejte prosim znovu datum ve formatu DD MM YYYY ");
                 
 
 
@@ -151,6 +160,13 @@ namespace @new
             }
 
         }
+
+        /// <summary>
+        /// Vrati rocni obdobi na zaklade data
+        /// </summary>
+        /// <param name="day">den </param>
+        /// <param name="month">mesic </param>
+        /// <returns> barvu zastupujici rocni obdobi</returns>
         public static ConsoleColor GetSeason(int day, int month)
         {
             //winter 
