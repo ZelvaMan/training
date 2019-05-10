@@ -14,7 +14,7 @@ namespace @new
         static void Main(string[] args)
         {
 
-            Console.Title = "Konecne funkcni";
+            Console.Title = "Colored date";
             Console.WriteLine("Zadejte datum ve formatu dd mm rrrrr s mezerami mezi jednotlivymi cisly");
             Models.Date date = new Models.Date();
             date.ParseTheDate();
@@ -24,6 +24,7 @@ namespace @new
             bool leap_year = curentDate.LeapYear;
             int DayOfMonth = curentDate.GetNumberOfDays(leap_year);
             ConsoleColor color = curentDate.GetSeason();
+            //ciclus, write all dates form 5 years before to 5 years after the dates
             while (true)
             {
 
@@ -39,6 +40,7 @@ namespace @new
                 //end of the month
                 if (curentDate.Day >= DayOfMonth + 1)
                 {
+                   // generate day of month , because month changed
                     DayOfMonth = curentDate.GetNumberOfDays(leap_year);
                     curentDate.Day = 1;
                     curentDate.Month++;
@@ -47,32 +49,33 @@ namespace @new
                 //end of the year
                 if (curentDate.Month >= 12 && curentDate.Day >= DayOfMonth)
                 {
-                    
+
                     curentDate.Month = 1;
                     curentDate.Year++;
                     curentDate.Day = 1;
                     leap_year = curentDate.LeapYear;
-                    //if leap year write yelow  line 
-                    if (leap_year) 
+                    //if leap year write yelow  line
+                    if (leap_year)
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("-------------------------------------------------------------");
-                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = color;
                     }
                 }
-                //spring
+
+                //season change to spring
                 if (curentDate.Day == 20 && curentDate.Month == 3)
                     color = ConsoleColor.Green;
 
-                //summer
+                //season change to summer
                 if (curentDate.Day == 21 && curentDate.Month == 6)
                     color = ConsoleColor.Red;
 
-                //fall
+                //season change to fall
                 if (curentDate.Day == 23 && curentDate.Month == 9)
                     color = ConsoleColor.Magenta;
 
-                //winter
+                //season change to winter
                 if (curentDate.Day == 21 && curentDate.Month == 12)
                     color = ConsoleColor.Blue;
 
@@ -85,9 +88,9 @@ namespace @new
             }
             Console.ReadKey();
         }
-        
 
-        
+
+
 
     }
 }

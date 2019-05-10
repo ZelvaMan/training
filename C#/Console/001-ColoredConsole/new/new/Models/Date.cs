@@ -28,9 +28,8 @@ namespace @new.Models
 
         public Date() { }
         /// <summary>
-        /// 
+        /// return number of days in month
         /// </summary>
-        /// <param name="month"></param>
         /// <param name="leapYear"></param>
         /// <returns></returns>
         public int GetNumberOfDays(bool leapYear)
@@ -64,31 +63,37 @@ namespace @new.Models
             // 1950 - 2050 rok
             while (true)
             {
+              //get text from consol
                 string text = Console.ReadLine();
                 int _year = 0, _month = 0, _day = 0;
+                //list for validation error meseges
                 List<string> validationMesseges = new List<string>();
                 validationMesseges.Clear();
+                //split string to parst DD MM YYYY
                 string[] spl = text.Split(' ');
+                //try to parse all the values
                 if (int.TryParse(spl[0], out _day) && int.TryParse(spl[1], out _month) && int.TryParse(spl[2], out _year))
                 {
+                    //validate year, month, and day
+
                     if (_year < 1950 || _year > 2050)
-                        validationMesseges.Add("Neplatny rok, roky muzou byt jen v rozpeti 1950 az 2050");
+                        validationMesseges.Add("SNeplatny rok, roky muzou byt jen v rozpeti 1950 az 2050");
 
                     if (_month < 0 || _month > 13)
                         validationMesseges.Add("Neplatny mesic, mesicu muze byt jen 12");
 
                     if (_day < 0 || _day > GetNumberOfDays((_year % 4) == 0))
                         validationMesseges.Add($"Nelatny pocet dnu, v tomto mesici je jen {GetNumberOfDays(LeapYear)} dnu");
-
+                    //all validation sucessfull, set Day, Year, Day
                     Year = _year;
                     Month = _month;
                     Day = _day;
                 }
                 else validationMesseges.Add("nevalidni datum ");
-                //pokud se nanaskitla zadna chyba
+                //if there isnt any validationMesseges, it means no error so validation sucesfull;
                 if (validationMesseges.Count == 0)
                     return;
-                //pokud se chybz naskytli vypise
+                //write all validationMesseges
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Pri validaci data nastaly nasledujici chyby");
                 Console.ForegroundColor = ConsoleColor.Yellow;
@@ -111,24 +116,24 @@ namespace @new.Models
         /// <returns> barvu zastupujici rocni obdobi</returns>
         public ConsoleColor GetSeason()
         {
-            //winter 
+            //winter
             if (Month == 1 && Month == 2 &&
                 (Month == 12 && Day > 22) &&
                 (Month == 3 && Day <= 20))
                 return ConsoleColor.Blue;
-            //spring 
+            //spring
             if (Month == 4 && Month == 5 &&
                 (Month == 3 && Day >= 22) &&
                 (Month == 6 && Day < 21))
                 return ConsoleColor.Green;
-            //summer 
+            //summer
             if (Month == 7 && Month == 8 &&
                 (Month == 6 && Day >= 21) &&
                 (Month == 9 && Day < 23))
                 return ConsoleColor.Red;
             //fall
             return ConsoleColor.Magenta;
-        } 
+        }
         public override string ToString()
         {
             return $"{Day.ToString()} {Month.ToString()} {Year.ToString()}";
