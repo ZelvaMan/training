@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
+using GuessTheNumber.Models;
 
 namespace GuessTheNumber
 {
@@ -12,16 +13,17 @@ namespace GuessTheNumber
 
         static void Main(string[] args)
         {
-            Models.Game game = new Models.Game(LoadFromConfig());
+            Game game = new Game(LoadFromConfig());
             game.Play();
             Console.ReadKey();
         }
+
         //get min and max values from app.config
-        private static Models.MinMaxStructure LoadFromConfig()
+        private static MinMaxStructure LoadFromConfig()
         {
             int minValue = int.Parse(ConfigurationManager.AppSettings["MinValue"]);
             int maxValue = int.Parse(ConfigurationManager.AppSettings["MaxValue"]);
-            return new Models.MinMaxStructure { Min = minValue, Max = maxValue };
+            return new MinMaxStructure { Min = minValue, Max = maxValue };
         }
     }
 }
