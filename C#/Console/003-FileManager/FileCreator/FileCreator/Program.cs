@@ -10,10 +10,8 @@ namespace FileCreator
 	{
 		static void Main(string[] args)
 		{
-			Models.FileCreator creator = new Models.FileCreator(@"C:\Zkouska");
-			creator.FoldersCount = 5;
-			creator.FilesInFolders = 5;
-			creator.Create();
+			Models.FileCreator creator = new Models.FileCreator(@"C:\Zkouska") {FoldersCount = 5, FilesInFolders = 5};
+			creator.CreateDirectory();
 			Console.ReadKey();
 
 		}

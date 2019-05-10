@@ -18,7 +18,7 @@ namespace FileCreator.Models
 			Path_ = path;
 		}
 
-		public void Create()
+		public void CreateDirectory()
 		{
 			CreateFolders(Path_, FoldersCount);
 		}
