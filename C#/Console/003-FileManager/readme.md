@@ -44,6 +44,6 @@ Menu contains
     
 ## Technical details
 
-*   Program will use classes  System.IO.DirectoryInfo, System.IO.Directory, System.IO.FileInfo
+*   Program will use classes  System.IO., System.IO.Directory, System.IO.FileInfo
 *   Try to divide your code to as many functions as possible so each function does only 1 thing and they combine more complex structures
 
