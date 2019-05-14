@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace BasicFileOperations.Models
@@ -24,8 +25,12 @@ namespace BasicFileOperations.Models
 						FileInfos();
 						break;
 					case "2":
-						DeleteFiles();
+						Delete();
 						break;
+					case "3":
+						Create();
+						break;
+
 				}
 
 				Console.ReadKey();
@@ -34,25 +39,48 @@ namespace BasicFileOperations.Models
 			}
 		}
 
-		#region Delete Files 2#
+		#region Create Files #3
+
+		private void Create()
+		{
+			CreateDirectory(ParseCreatePath());
+		}
+
+		public void CreateDirectory(string path)
+		{
+			Directory.CreateDirectory(path);
+			Console.WriteLine($"Created directory {path}");
+		}
+
+
+		#endregion
+
+		#region Delete Files #2
 		/// <summary>
 		/// delete Directory, path is parsed from console. Before delete ask user
 		/// </summary>
-		public void DeleteFiles()
+		private void Delete()
 		{
 			//parse path from console
 			string path = ParsePath("Write a directory, that you want to delete");
 			// get number of files in directory
 			int NumOfFiles = FileOperations.GetFilesInDirectory(path).Length;
 			//ask user if he realy want to delete these files
-			if (!ParseBool($"Do you really want to delete {NumOfFiles} Files in {path}")) 
+			if (!ParseBool($"Do you really want to delete {NumOfFiles} Files in {path}"))
 				return;
+			DeleteDirectory(path);
+		}
+		/// <summary>
+		/// delete all files in directory and subdirectories
+		/// </summary>
+		/// <param name="path"></param>
+		public void DeleteDirectory(string path)
+		{
 			//write all deleted files
 			WriteFileInfo(false, path);
 			//delete files
 			FileOperations.DeleteFiles(path);
 		}
-
 
 		#endregion
 
@@ -60,16 +88,22 @@ namespace BasicFileOperations.Models
 
 		private void FileInfos()
 		{
-			WriteFileInfo(ParseBool( "Do you want full info about files (T|F)"),
+			WriteFileInfo(ParseBool("Do you want full info about files (T|F)"),
 				ParsePath("Please Write Path to file/folder"));
 		}
-
+		/// <summary>
+		/// write info about all files in directory
+		/// </summary>
+		/// <param name="fullInfo"></param>
+		/// <param name="path"></param>
 		public void WriteFileInfo(bool fullInfo, string path)
 		{
-			foreach (string s in FileOperations.GetAllFilesinfo(fullInfo, path))
-			{
-				Console.WriteLine(s);
-			}
+			var FullInfos = FileOperations.GetAllFilesinfo(fullInfo, path);
+			if (FullInfos != null)
+				foreach (string s in FullInfos)
+				{
+					Console.WriteLine(s);
+				}
 		}
 
 
@@ -81,9 +115,9 @@ namespace BasicFileOperations.Models
 		/// </summary>
 		/// <param name="errorMessage"></param>
 		/// <returns></returns>
-		private bool ParseBool( string StartedMessage)
+		private bool ParseBool(string startedMessage)
 		{
-			Console.WriteLine(StartedMessage);
+			Console.WriteLine(startedMessage);
 			while (true)
 			{
 				switch (Console.ReadLine().ToLower())
@@ -109,19 +143,54 @@ namespace BasicFileOperations.Models
 			}
 		}
 
-		private string ParsePath(string StartedMessage)
+		private string ParsePath(string startedMessage)
 		{
-			Console.WriteLine(StartedMessage);
+			Console.WriteLine(startedMessage);
 			while (true)
 			{
 				string path = Console.ReadLine();
-				if (Directory.Exists(path) && path != null)
-					return path;
+				try
+				{
+					if (Path.IsPathRooted(path))
+					{
+						return path;
+					}
+				}
+				catch (Exception e)
+				{
+
+				}
 				Console.WriteLine("Write a valid path");
 			}
 		}
 
+		private string ParseCreatePath()
+		{
+			string path1 = ParsePath("Get Folder Directory");
+			string name = ParseFolderName(20);
+			return Path.Combine(path1, name);
+		}
 
+		private string ParseFolderName(int maxLeght)
+		{
+			Console.WriteLine("Enter Folder Name");
+			while (true)
+			{
+				string name = Console.ReadLine();
+				bool invalidName = false;
+				foreach (char ch in Path.InvalidPathChars)
+				{
+					if (name.Contains(ch))
+						invalidName = true;
+				}
+				if (name.Length > maxLeght)
+					invalidName = true;
+				if (!invalidName)
+					return name;
+
+
+			}
+		}
 		#endregion
 
 		#region Writing

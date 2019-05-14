@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,13 +22,25 @@ namespace BasicFileOperations.Models
 		public static List<string> GetAllFilesinfo(bool FullInfo, string path)
 		{
 			//paths to all files in directories
-			string[] directories = Directory.GetFiles(path, ".", SearchOption.AllDirectories);
-			List<string> FileInfos = new List<string>();
-			foreach (string file in directories)
+			try
 			{
-				FileInfos.Add(FullInfo ? GetFullFileInfo(file).ToString() : GetFileInfo(file));
+				string[] directories = Directory.GetFiles(path, ".", SearchOption.AllDirectories);
+				List<string> FileInfos = new List<string>();
+				foreach (string file in directories)
+				{
+					FileInfos.Add(FullInfo ? GetFullFileInfo(file).ToString() : GetFileInfo(file));
+				}
+				return FileInfos;
 			}
-			return FileInfos;
+			catch (Exception e)
+			{
+				Console.ForegroundColor = ConsoleColor.Yellow;
+				Console.WriteLine("Aces Denied, check your permissions");
+				Console.ForegroundColor = ConsoleColor.DarkGray;
+			}
+
+			return null;
+
 		}
 
 		#region private metods
@@ -65,13 +78,27 @@ namespace BasicFileOperations.Models
 			return Directory.GetFiles(path,".",SearchOption.AllDirectories);
 		}
 
-		#region DeleteFiles
+		#region Delete
 
 
 
 		public static void DeleteFiles(string path)
 		{
 			Directory.Delete(path,true);
+		}
+
+		#endregion
+
+		#region CreateDirectory
+		/// <summary>
+		/// C:/aaa/bbb => C:/aaa
+		/// </summary>
+		/// <param name="path"></param>
+		public static string DeleteLastPArtOfPath(string path)
+		{
+			int LastIndexLeght = path.Split('/').Last().Length + 1;
+			string s =  path.Substring(0, path.Length - LastIndexLeght);
+			return s;
 		}
 
 		#endregion
