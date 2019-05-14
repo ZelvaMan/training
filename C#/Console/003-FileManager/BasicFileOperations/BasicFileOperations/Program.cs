@@ -12,7 +12,7 @@ namespace BasicFileOperations
 		static void Main(string[] args)
 		{
 			Menu m = new Menu();
-			m.WriteFileInfo(true, @"C:\Zkouska");
+			m.Launch();
 			Console.ReadKey();
 		}
 	}

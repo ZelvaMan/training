@@ -10,6 +10,9 @@ namespace BasicFileOperations.Models
 	public static class FileOperations
 	{
 
+		#region FileInfos
+
+
 		/// <summary>
 		/// return info of all files in directory
 		/// </summary>
@@ -20,9 +23,9 @@ namespace BasicFileOperations.Models
 			//paths to all files in directories
 			string[] directories = Directory.GetFiles(path, ".", SearchOption.AllDirectories);
 			List<string> FileInfos = new List<string>();
-			foreach(string file in directories)
-			{ 
-				FileInfos.Add(FullInfo ? GetFullFileInfo(file).ToString() : GetFileInfo(path));
+			foreach (string file in directories)
+			{
+				FileInfos.Add(FullInfo ? GetFullFileInfo(file).ToString() : GetFileInfo(file));
 			}
 			return FileInfos;
 		}
@@ -45,8 +48,32 @@ namespace BasicFileOperations.Models
 		/// <returns></returns>
 		private static string GetFileInfo(string path)
 		{
-			return Path.GetFileName(path);
+			return Path.GetFullPath(path);
 		}
+		#endregion
+
+
+		#endregion
+
+		public static int GetNumberFilesInDirectory(string path)
+		{
+			return Directory.GetFiles(path,".", SearchOption.AllDirectories).GetLength(0);
+		}
+
+		public static  string[] GetFilesInDirectory(string path)
+		{
+			return Directory.GetFiles(path,".",SearchOption.AllDirectories);
+		}
+
+		#region DeleteFiles
+
+
+
+		public static void DeleteFiles(string path)
+		{
+			Directory.Delete(path,true);
+		}
+
 		#endregion
 	}
 }

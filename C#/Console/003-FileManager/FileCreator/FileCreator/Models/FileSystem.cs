@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 
 namespace FileCreator.Models
 {
-	class FileCreator
+	public class Creator
 	{
+
 		public string Path_ { get; private set; }
 		public int FoldersCount { get; set; }
 		public int FilesInFolders { get; set; }
 
-		public FileCreator(string path)
+		public Creator()
 		{
-			Path_ = path;
+
 		}
 
 		public void CreateDirectory()
@@ -44,7 +45,10 @@ namespace FileCreator.Models
 				CreateFile(FilePath);
 			}
 		}
-
+		/// <summary>
+		/// create a folder with folder's path in it
+		/// </summary>
+		/// <param name="path"></param>
 		private void CreateFile(string path)
 		{
 			using (StreamWriter sw = new StreamWriter(path))
@@ -53,6 +57,7 @@ namespace FileCreator.Models
 			}
 			Console.WriteLine(path);
 		}
+
 		/// <summary>
 		/// create folder name alphabet
 		/// 1-A, 2-B, atd.
@@ -71,6 +76,67 @@ namespace FileCreator.Models
 
 			return s.PadLeft(3, '0') + ".txt";
 		}
+
+		#region parsing
+		/// <summary>
+		/// parse properties from console
+		/// </summary>
+		public static Creator Parse()
+		{
+			return new Creator()
+				{FilesInFolders = ParseFilesCount(50), FoldersCount = ParseFoldersCount(50), Path_ = ParsePath()};
+		}
+
+		private static string ParsePath()
+		{
+			Console.WriteLine("Write a path");
+			while (true)
+			{
+				string path = Console.ReadLine();
+				if (Uri.IsWellFormedUriString(path,UriKind.RelativeOrAbsolute))
+					return path;
+				Console.WriteLine("Write a valid path");
+			}
+		}
+
+		private static int ParseFoldersCount(int MaxFolders)
+		{
+			Console.WriteLine("Write Folders count");
+			while (true)
+			{
+				int parsed = 0;
+				if (int.TryParse(Console.ReadLine(), out parsed))
+					if (parsed < MaxFolders)
+						return parsed;
+					else
+						Console.WriteLine($"cant create more that {MaxFolders} folders");
+				else
+					Console.WriteLine("Write a number");
+
+
+			}
+		}
+
+		private static int ParseFilesCount(int MaxFiles)
+		{
+			Console.WriteLine("Write Files count");
+			while (true)
+			{
+				int parsed = 0;
+				if (int.TryParse(Console.ReadLine(), out parsed))
+					if (parsed < MaxFiles)
+						return parsed;
+					else
+						Console.WriteLine($"cant create more that {MaxFiles} files");
+				else
+					Console.WriteLine("Write a number");
+
+
+			}
+
+		}
+		#endregion
+
 
 	}
 }
