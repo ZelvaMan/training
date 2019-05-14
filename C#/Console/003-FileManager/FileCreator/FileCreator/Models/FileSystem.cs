@@ -84,7 +84,7 @@ namespace FileCreator.Models
 		public static Creator Parse()
 		{
 			return new Creator()
-				{FilesInFolders = ParseFilesCount(50), FoldersCount = ParseFoldersCount(50), Path_ = ParsePath()};
+				{FilesInFolders = ParseFilesCount(50), FoldersCount = ParseFoldersCount(26), Path_ = ParsePath()};
 		}
 
 		private static string ParsePath()
@@ -93,7 +93,7 @@ namespace FileCreator.Models
 			while (true)
 			{
 				string path = Console.ReadLine();
-				if (Uri.IsWellFormedUriString(path,UriKind.RelativeOrAbsolute))
+				if (Directory.Exists(path))
 					return path;
 				Console.WriteLine("Write a valid path");
 			}

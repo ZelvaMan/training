@@ -14,26 +14,26 @@ namespace BasicFileOperations.Models
 		{
 			while (true)
 			{
+				int i = 2;
 				WriteMenu();
-				switch (Console.ReadLine())
+				switch (Console.Read())
 				{
-					case "4":
+
+					case '1':
+						FileInfos();
+						break;
+					case '2':
+						Delete();
+						break;
+					case '3':
+						Create();
+						break;
+					case '4':
 						Console.WriteLine("press any button to close");
 						return;
 						break;
-					case "1":
-						FileInfos();
-						break;
-					case "2":
-						Delete();
-						break;
-					case "3":
-						Create();
-						break;
 
 				}
-
-				Console.ReadKey();
 				Console.ReadKey();
 				Console.Clear();
 			}
@@ -100,9 +100,9 @@ namespace BasicFileOperations.Models
 		/// <param name="path"></param>
 		public void WriteFileInfo(bool fullInfo, string path)
 		{
-			var FullInfos = FileOperations.GetAllFilesinfo(fullInfo, path);
-			if (FullInfos != null)
-				foreach (string s in FullInfos)
+			var fullInfos = FileOperations.GetAllFilesInfo(fullInfo, path);
+			if (fullInfos != null)
+				foreach (string s in fullInfos)
 				{
 					Console.WriteLine(s);
 				}

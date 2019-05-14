@@ -12,31 +12,36 @@ namespace BasicFileOperations.Models
 	{
 
 		#region FileInfos
+		
+
+
+
 
 
 		/// <summary>
 		/// return info of all files in directory
 		/// </summary>
-		/// <param name="FullInfo">if true returnt <see cref="FileSummaryList"/>, else only full paths </param>
+		/// <param name="FullInfo">if true return <see cref="FileSummaryItem"/>, else only full paths </param>
 		/// <returns></returns>
-		public static List<string> GetAllFilesinfo(bool FullInfo, string path)
+		public static List<string> GetAllFilesInfo(bool FullInfo, string path)
 		{
 			//paths to all files in directories
 			try
 			{
+				
 				string[] directories = Directory.GetFiles(path, ".", SearchOption.AllDirectories);
-				List<string> FileInfos = new List<string>();
+				List<string> fileInfos = new List<string>();
 				foreach (string file in directories)
 				{
-					FileInfos.Add(FullInfo ? GetFullFileInfo(file).ToString() : GetFileInfo(file));
+					fileInfos.Add(FullInfo ? GetFullFileInfo(file).ToString() : GetFileInfo(file));
 				}
-				return FileInfos;
+				return fileInfos;
 			}
 			catch (Exception e)
 			{
 				Console.ForegroundColor = ConsoleColor.Yellow;
 				Console.WriteLine(e);
-				Console.WriteLine("Aces Denied, check your permissions");
+				Console.WriteLine("Access Denied, check your permissions");
 				Console.ForegroundColor = ConsoleColor.DarkGray;
 			}
 
@@ -44,16 +49,15 @@ namespace BasicFileOperations.Models
 
 		}
 
-		#region private metods
 		/// <summary>
-		/// return name, extension, size and create date
+		/// return name, extension, Size and create date
 		/// </summary>
 		/// <param name="path">path to file</param>
-		/// <returns>name extension size create date</returns>
-		private static FileSummaryList GetFullFileInfo(string path)
+		/// <returns>name extension Size create date</returns>
+		private static FileSummaryItem GetFullFileInfo(string path)
 		{
 			FileInfo file = new FileInfo(path);
-			return new FileSummaryList() { CreateDate = file.CreationTime, Extensoion = file.Extension, Name = file.Name, size = file.Length / 1000 };
+			return new FileSummaryItem() { CreateDate = file.CreationTime, Extensoion = file.Extension, Name = file.Name, Size = file.Length  };
 		}
 		/// <summary>
 		/// return full path
@@ -67,7 +71,6 @@ namespace BasicFileOperations.Models
 		#endregion
 
 
-		#endregion
 
 		public static int GetNumberFilesInDirectory(string path)
 		{
