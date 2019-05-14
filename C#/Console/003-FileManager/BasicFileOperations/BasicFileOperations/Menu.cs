@@ -70,6 +70,7 @@ namespace BasicFileOperations.Models
 				return;
 			DeleteDirectory(path);
 		}
+
 		/// <summary>
 		/// delete all files in directory and subdirectories
 		/// </summary>
@@ -91,6 +92,7 @@ namespace BasicFileOperations.Models
 			WriteFileInfo(ParseBool("Do you want full info about files (T|F)"),
 				ParsePath("Please Write Path to file/folder"));
 		}
+
 		/// <summary>
 		/// write info about all files in directory
 		/// </summary>
@@ -156,10 +158,8 @@ namespace BasicFileOperations.Models
 						return path;
 					}
 				}
-				catch (Exception e)
-				{
+				catch (Exception e) { }
 
-				}
 				Console.WriteLine("Write a valid path");
 			}
 		}

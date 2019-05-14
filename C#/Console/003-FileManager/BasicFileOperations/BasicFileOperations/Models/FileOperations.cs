@@ -35,6 +35,7 @@ namespace BasicFileOperations.Models
 			catch (Exception e)
 			{
 				Console.ForegroundColor = ConsoleColor.Yellow;
+				Console.WriteLine(e);
 				Console.WriteLine("Aces Denied, check your permissions");
 				Console.ForegroundColor = ConsoleColor.DarkGray;
 			}
