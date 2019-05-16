@@ -18,7 +18,10 @@ namespace ColoredMatrix.Models
 			Rows = rows;
 			r = new Random(DateTime.Now.Millisecond);
 		}
-
+		/// <summary>
+		/// generate a array contains random numbers from 0 to 20
+		/// </summary>
+		/// <returns></returns>
 		public int[,] Generete()
 		{
 			//[Collumb,Row]

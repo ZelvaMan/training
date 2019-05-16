@@ -12,31 +12,40 @@ namespace ColoredMatrix.Models
 		private int collumbs, rows;
 
 		private MatrixGenerator generator;
+
 		private int[,] matrix;
 
 		public MatrixRender()
 		{
-			collumbs = ParseNumber("Enter Number of collumbs", 50,1);
-			rows = ParseNumber("Enter Number of rows", 50,1);
+			collumbs = ParseNumber("Enter Number of collumbs", 50, 1);
+			rows = ParseNumber("Enter Number of rows", 50, 1);
 			generator = new MatrixGenerator(collumbs, rows);
 		}
-
 		public void Start()
 		{
+			//create a new generator
 			matrix = generator.Generete();
+			//set default divide number
 			int divideNumber = 2;
 			Console.BackgroundColor = ConsoleColor.White;
 			while (true)
 			{
-
+				//draw a matrix 
 				Draw(matrix, divideNumber);
+				//get new divide number
 				divideNumber = ParseNumber("Enter Number ", 20, 2);
 
 			}
 		}
 
 		#region Parsing
-
+		/// <summary>
+		/// parse number from console, ask user with 
+		/// </summary>
+		/// <param name="startMessage">ask user for number with this</param>
+		/// <param name="max">maximum  number</param>
+		/// <param name="min">minimum number</param>
+		/// <returns></returns>
 		public int ParseNumber(string startMessage, int max, int min)
 		{
 			Console.WriteLine(startMessage);
@@ -49,16 +58,18 @@ namespace ColoredMatrix.Models
 					else
 						Console.WriteLine($"Number must be smaller then {max} nad bigger then {min}");
 				else
-				Console.WriteLine("Please Write a number");
-				
-
+					Console.WriteLine("Please Write a number");
 			}
 		}
 
 		#endregion
 
 		#region drawing
-
+		/// <summary>
+		/// draw a matrix
+		/// </summary>
+		/// <param name="matrix">2 dimension array</param>
+		/// <param name="DivideNumber">number from 2 to 200, with it it makes colors</param>
 		public void Draw(int[,] matrix, int DivideNumber)
 		{
 
@@ -69,10 +80,10 @@ namespace ColoredMatrix.Models
 				Console.BufferHeight = 50;
 			else
 				Console.BufferHeight = rows + 4;
-			
+
 			width = Console.BufferWidth;
 			height = Console.BufferHeight;
-
+			//get margin
 			int widthMargin = (width - collumbs) / 2;
 			int heightMargin = (height - rows) / 2;
 
@@ -86,13 +97,22 @@ namespace ColoredMatrix.Models
 					Console.Write(num);
 				}
 			}
+			//reset cursor location under matrix
 			Console.SetCursorPosition(0, matrix.GetLength(1) + heightMargin);
 			Console.ForegroundColor = ConsoleColor.DarkGray;
 		}
+		/// <summary>
+		/// get color based on divide number
+		/// </summary>
+		/// <param name="divideNumber"></param>
+		/// <param name="number"></param>
+		/// <returns></returns>
 		private ConsoleColor getColor(int divideNumber, int number)
 		{
+			//get how many color can be in 20/divide nuber
 			int numbersOfColors = 20 / divideNumber;
 			int i = int.Parse(Math.Floor(number / (float)divideNumber).ToString());
+			//when is divide number 20 and number 20 this metod dont work but this fix it
 			if (numbersOfColors == 1 && number == 20)
 			{
 				i = 0;
