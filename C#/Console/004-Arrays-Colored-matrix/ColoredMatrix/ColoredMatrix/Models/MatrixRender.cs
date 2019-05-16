@@ -93,9 +93,9 @@ namespace ColoredMatrix.Models
 		{
 			int numbersOfColors = 20 / divideNumber;
 			int i = int.Parse(Math.Floor(number / (float)divideNumber).ToString());
-			if (i > numbersOfColors)
+			if (numbersOfColors == 1 && number == 20)
 			{
-				int o = 0;
+				i = 0;
 			}
 			var v = (ConsoleColor)i;
 			return v;
