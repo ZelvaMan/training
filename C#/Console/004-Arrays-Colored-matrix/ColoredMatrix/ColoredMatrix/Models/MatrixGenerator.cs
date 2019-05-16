@@ -9,12 +9,12 @@ namespace ColoredMatrix.Models
 {
 	class MatrixGenerator
 	{
-		private int Collumbs, Rows;
+		private int Columns, Rows;
 		private Random r;
 
-		public MatrixGenerator(int collumbs, int rows)
+		public MatrixGenerator(int columns, int rows)
 		{
-			Collumbs = collumbs;
+			Columns = columns;
 			Rows = rows;
 			r = new Random(DateTime.Now.Millisecond);
 		}
@@ -25,8 +25,8 @@ namespace ColoredMatrix.Models
 		public int[,] Generete()
 		{
 			//[Collumb,Row]
-			int[,] matrix = new int[Collumbs, Rows];
-			for (int col = 0; col < Collumbs; col++)
+			int[,] matrix = new int[Columns, Rows];
+			for (int col = 0; col < Columns; col++)
 			{
 				for (int row = 0; row < Rows; row++)
 				{

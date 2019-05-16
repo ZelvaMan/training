@@ -9,7 +9,7 @@ namespace ColoredMatrix.Models
 {
 	public class MatrixRender
 	{
-		private int collumbs, rows;
+		private int columns, rows;
 
 		private MatrixGenerator generator;
 
@@ -17,9 +17,9 @@ namespace ColoredMatrix.Models
 
 		public MatrixRender()
 		{
-			collumbs = ParseNumber("Enter Number of collumbs", 50, 1);
+			columns = ParseNumber("Enter Number of columns", 50, 1);
 			rows = ParseNumber("Enter Number of rows", 50, 1);
-			generator = new MatrixGenerator(collumbs, rows);
+			generator = new MatrixGenerator(columns, rows);
 		}
 		public void Start()
 		{
@@ -84,17 +84,19 @@ namespace ColoredMatrix.Models
 			width = Console.BufferWidth;
 			height = Console.BufferHeight;
 			//get margin
-			int widthMargin = (width - collumbs) / 2;
+			int widthMargin = (width - columns) / 2;
 			int heightMargin = (height - rows) / 2;
 
-			for (int col = 0; col < collumbs; col++)
+			for (int col = 0; col < columns; col++)
 			{
 				for (int row = 0; row < rows; row++)
 				{
 					int num = matrix[col, row];
-					Console.SetCursorPosition(widthMargin + row, heightMargin + col);
+					string s = " ";
+					Console.SetCursorPosition(widthMargin + (col * 3), heightMargin + row);
 					Console.ForegroundColor = getColor(DivideNumber, num);
-					Console.Write(num);
+					s += num.ToString().PadLeft(2, '0');
+					Console.Write(s);
 				}
 			}
 			//reset cursor location under matrix
@@ -113,10 +115,7 @@ namespace ColoredMatrix.Models
 			int numbersOfColors = 20 / divideNumber;
 			int i = int.Parse(Math.Floor(number / (float)divideNumber).ToString());
 			//when is divide number 20 and number 20 this metod dont work but this fix it
-			if (numbersOfColors == 1 && number == 20)
-			{
-				i = 0;
-			}
+			if(numbersOfColors > )
 			var v = (ConsoleColor)i;
 			return v;
 		}
