@@ -20,6 +20,7 @@ namespace XMassTree.Models
 			int height = 5 + trunkStrong - 2;
 
 		}
+		
 
 		public string GetLine(int trunkStrong, int width)
 		{

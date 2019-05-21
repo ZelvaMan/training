@@ -13,6 +13,8 @@ namespace ColoredMatrix.Models
 
 		private MatrixGenerator generator;
 
+		private const int PadCharacters = 2;
+		private const string Divider = " | ";
 		private int[,] matrix;
 
 		public MatrixRender()
@@ -69,8 +71,8 @@ namespace ColoredMatrix.Models
 		/// draw a matrix
 		/// </summary>
 		/// <param name="matrix">2 dimension array</param>
-		/// <param name="DivideNumber">number from 2 to 200, with it it makes colors</param>
-		public void Draw(int[,] matrix, int DivideNumber)
+		/// <param name="divideNumber">number from 2 to 200, with it it makes colors</param>
+		public void Draw(int[,] matrix, int divideNumber)
 		{
 
 			Console.Clear();
@@ -91,13 +93,16 @@ namespace ColoredMatrix.Models
 			{
 				for (int row = 0; row < rows; row++)
 				{
-					int num = matrix[col, row];
-					string s = " ";
-					Console.SetCursorPosition(widthMargin + (col * 3), heightMargin + row);
-					Console.ForegroundColor = getColor(DivideNumber, num);
-					s += num.ToString().PadLeft(2, '0');
-					Console.Write(s);
-				}
+					int number = matrix[col, row];
+					Console.SetCursorPosition( widthMargin + (col * (PadCharacters + Divider.Length)),  heightMargin + row);
+					Console.ForegroundColor = getColor(divideNumber, number);
+					string numberstr = number.ToString().PadLeft(PadCharacters, '0');
+					if(col != 0)
+						Console.Write(Divider + numberstr);
+					else
+						Console.Write(numberstr.PadLeft(PadCharacters + Divider.Length , ' '));
+
+					}
 			}
 			//reset cursor location under matrix
 			Console.SetCursorPosition(0, matrix.GetLength(1) + heightMargin);
@@ -111,11 +116,9 @@ namespace ColoredMatrix.Models
 		/// <returns></returns>
 		private ConsoleColor getColor(int divideNumber, int number)
 		{
-			//get how many color can be in 20/divide nuber
+			//get how many color can be in 20/divide number
 			int numbersOfColors = 20 / divideNumber;
 			int i = int.Parse(Math.Floor(number / (float)divideNumber).ToString());
-			//when is divide number 20 and number 20 this metod dont work but this fix it
-			if(numbersOfColors > )
 			var v = (ConsoleColor)i;
 			return v;
 		}
