@@ -10,6 +10,12 @@ namespace XMassTree
 	{
 		static void Main(string[] args)
 		{
+
+			var  v = new Models.TreeMaker();
+			foreach (var str in v.CreateTree(6))
+			{
+				Console.WriteLine(str);
+			}
 			Console.ReadKey();
 		}
 	}

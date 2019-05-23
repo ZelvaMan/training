@@ -12,30 +12,30 @@ Then display a tree like this
 ```	
 							    **
 							   ****
-						            II
+						      II
 							   *II*
 							  */II\*
 							 */\II/\*
 							*//\II/\\*
-						       */\/\II/\/\*
+			       */\/\II/\/\*
 							  *IIII*
 							 */IIII\*
 							*/\IIII/\*
-						       *//\IIII/\\*
-						      */\/\IIII/\/\*
-						     *//\/\IIII/\/\\*
-						    */\/\/\IIII/\/\/\*
+			       *//\IIII/\\*
+			      */\/\IIII/\/\*
+			     *//\/\IIII/\/\\*
+			    */\/\/\IIII/\/\/\*
 							  IIIIII
 							 *IIIIII*
 							*/IIIIII\*
-						       */\IIIIII/\*
-						      *//\IIIIII/\\*
-						     */\/\IIIIII/\/\*
-						    *//\/\IIIIII/\/\\*
-					           */\/\/\IIIIII/\/\/\*
-					          *//\/\/\IIIIII/\/\/\\*
-					         */\/\/\/\IIIIII/\/\/\/\*
-						          IIIIII
+			       */\IIIIII/\*
+			      *//\IIIIII/\\*
+			     */\/\IIIIII/\/\*
+			    *//\/\IIIIII/\/\\*
+         */\/\/\IIIIII/\/\/\*
+        *//\/\/\IIIIII/\/\/\\*
+	     */\/\/\/\IIIIII/\/\/\/\*
+			          IIIIII
 							  IIIIII
 							  IIIIII    
 							  IIIIII   

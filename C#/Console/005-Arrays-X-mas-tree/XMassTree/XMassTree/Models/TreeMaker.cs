@@ -6,51 +6,101 @@ using System.Threading.Tasks;
 
 namespace XMassTree.Models
 {
-	class TreeMaker
+	static class TreeMaker
 	{
-		private int trunk;
 
-		public TreeMaker(int trunkStrong)
+		static public List<string> CreateTree(int trunkWidth)
 		{
-			trunk = trunkStrong;
-		}
-
-		public List<string> DrawBranch(int trunkStrong, int MaxWidth)
-		{
-			int height = 5 + trunkStrong - 2;
-
-		}
-		
-
-		public string GetLine(int trunkStrong, int width)
-		{
-			string s = "";
-			if (trunkStrong == width)
+			List<string> tree = new List<string>();
+			tree.Add("**");
+			tree.Add("****");
+			for (int i = 1; i <= trunkWidth / 2; i++)
 			{
-				int Widthplus = width + 1;
-				for (int i = 0; i < Widthplus; i++)
-				{
-					s += "I";
-				}
-
-				return s;
+				tree.AddRange(CreateBranch(i * 2));
 			}
 
-			if ((trunkStrong + 2) == width)
+			for (int i = 0; i < 6; i++)
 			{
-				int Widthplus = width + 1;
+				tree.Add(CreateTrunk(trunkWidth));
+			}
+
+			return tree;
+		}
+
+		static public List<string> CreateBranch(int trunkWidth)
+		{
+			List<string> list = new List<string>();
+			int height = 5 + ((trunkWidth / 2 - 1) * 2);
+			for (int i = 0; i < height; i++)
+			{
+				int width = trunkWidth + i * 2;
+				list.Add(CreateLine(trunkWidth, width));
+			}
+			return list;
+		}
+
+
+		#region Line Creation
+
+		static private string CreateLine(int trunkWidth, int width)
+		{
+			string s = "";
+			//only trunk
+			if (trunkWidth == width)
+				return CreateTrunk(width);
+
+			//only one leaf
+			if ((trunkWidth + 2) == width)
+			{
 				s += "*";
-				for (int i = 0; i < Widthplus; i++)
-				{
-					s += "I";
-				}
+				s += CreateTrunk(width);
 				s += "*";
 				return s;
 			}
 
 			s += "*/";
+			int leafWidth = ((width - (trunkWidth + 2)) / 2) - 1;
+			s += CreateLeaf(true, leafWidth);
+			s += CreateTrunk(trunkWidth);
+			s += CreateLeaf(false, leafWidth);
+			s += @"\*";
+			return s;
+		}
+
+		static private string CreateLeaf(bool startDirection, int leafWidth)
+		{
+			string s = "";
+			leafWidth++;
+			for (int i = 0; i < leafWidth; i++)
+			{
+				if (startDirection)
+				{
+					s += "/";
+					startDirection = false;
+				}
+				else
+				{
+					s += @"\";
+					startDirection = true;
+				}
+			}
 
 			return s;
 		}
+
+		static private string CreateTrunk(int width)
+		{
+			string s = "";
+			for (int i = 0; i < width; i++)
+			{
+				s += "I";
+			}
+
+			return s;
+		}
+
+
+		#endregion
+
 	}
 }
