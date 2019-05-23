@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XMassTree.Models;
 
 namespace XMassTree
 {
@@ -10,12 +11,8 @@ namespace XMassTree
 	{
 		static void Main(string[] args)
 		{
-
-			var  v = new Models.TreeMaker();
-			foreach (var str in v.CreateTree(6))
-			{
-				Console.WriteLine(str);
-			}
+			var drawer = new Models.TreeDrawer();
+			drawer.run();
 			Console.ReadKey();
 		}
 	}

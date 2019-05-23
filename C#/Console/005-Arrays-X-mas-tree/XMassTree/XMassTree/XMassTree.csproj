@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Tree.cs" />
     <Compile Include="Models\TreeDrawer.cs" />
     <Compile Include="Models\TreeMaker.cs" />
     <Compile Include="Program.cs" />

@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace XMassTree.Models
 {
-	static class TreeMaker
+	public static class TreeMaker
 	{
+		private  const int DownTrunkHeight = 5;
+		static  private int MaxWidth = 0;
 
-		static public List<string> CreateTree(int trunkWidth)
+		static public Tree CreateTree(int trunkWidth)
 		{
+			MaxWidth = 0;
 			List<string> tree = new List<string>();
 			tree.Add("**");
 			tree.Add("****");
@@ -19,18 +22,18 @@ namespace XMassTree.Models
 				tree.AddRange(CreateBranch(i * 2));
 			}
 
-			for (int i = 0; i < 6; i++)
+			for (int i = 0; i < (DownTrunkHeight +1); i++)
 			{
 				tree.Add(CreateTrunk(trunkWidth));
 			}
 
-			return tree;
+			return new Tree(){DownTrunkHeight = DownTrunkHeight,MaxWidth = MaxWidth, XMassTree = tree};
 		}
 
 		static public List<string> CreateBranch(int trunkWidth)
 		{
 			List<string> list = new List<string>();
-			int height = 5 + ((trunkWidth / 2 - 1) * 2);
+			int height = 6 + ((trunkWidth / 2 - 1) * 2);
 			for (int i = 0; i < height; i++)
 			{
 				int width = trunkWidth + i * 2;
@@ -53,7 +56,7 @@ namespace XMassTree.Models
 			if ((trunkWidth + 2) == width)
 			{
 				s += "*";
-				s += CreateTrunk(width);
+				s += CreateTrunk(trunkWidth);
 				s += "*";
 				return s;
 			}
@@ -64,6 +67,7 @@ namespace XMassTree.Models
 			s += CreateTrunk(trunkWidth);
 			s += CreateLeaf(false, leafWidth);
 			s += @"\*";
+			MaxWidth = s.Length;
 			return s;
 		}
 
