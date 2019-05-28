@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Jaycon;
 using Jaycon.Models;
+using Jaycon.Providers;
+using Json.Providers;
 using Newtonsoft.Json;
 
 namespace Json
@@ -14,8 +16,14 @@ namespace Json
 	{
 		static void Main(string[] args)
 		{
-			DirectoryToJSON dirjson = new DirectoryToJSON();
-			Console.WriteLine(dirjson.Convert(@"C:\Users\jan.rada\Documents\GitHub\training\C#\Console"));
+			if (args.Length == 0)
+			{
+				Console.WriteLine("Please enter a directory");
+				return;
+			}
+
+			Console.WriteLine(FileProvider.GetFiles(args[0]).Count);
+			Console.WriteLine(JSONProvider.ToJSON(FileProvider.GetFiles(args[0])));
 			Console.ReadKey();
 		}
 	}

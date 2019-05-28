@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaycon", "Jaycon\Jaycon.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "abc", "abc\abc.csproj", "{EDB7D90F-214B-45E0-A9EC-CB29CF4B2085}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileProvider", "FileProvider\FileProvider.csproj", "{499F30BC-EB8A-437F-A2B2-98BDBAEBCB58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{EDB7D90F-214B-45E0-A9EC-CB29CF4B2085}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDB7D90F-214B-45E0-A9EC-CB29CF4B2085}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDB7D90F-214B-45E0-A9EC-CB29CF4B2085}.Release|Any CPU.Build.0 = Release|Any CPU
+		{499F30BC-EB8A-437F-A2B2-98BDBAEBCB58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{499F30BC-EB8A-437F-A2B2-98BDBAEBCB58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{499F30BC-EB8A-437F-A2B2-98BDBAEBCB58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{499F30BC-EB8A-437F-A2B2-98BDBAEBCB58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
