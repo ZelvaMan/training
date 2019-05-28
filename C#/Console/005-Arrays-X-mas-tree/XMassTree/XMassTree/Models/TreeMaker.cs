@@ -8,7 +8,6 @@ namespace XMassTree.Models
 {
 	public static class TreeMaker
 	{
-		private  const int DownTrunkHeight = 5;
 		static  private int MaxWidth = 0;
 
 		static public Tree CreateTree(int trunkWidth)
@@ -22,12 +21,12 @@ namespace XMassTree.Models
 				tree.AddRange(CreateBranch(i * 2));
 			}
 
-			for (int i = 0; i < (DownTrunkHeight +1); i++)
+			for (int i = 0; i < (trunkWidth +1); i++)
 			{
 				tree.Add(CreateTrunk(trunkWidth));
 			}
 
-			return new Tree(){DownTrunkHeight = DownTrunkHeight,MaxWidth = MaxWidth, XMassTree = tree};
+			return new Tree(){DownTrunkHeight = trunkWidth,MaxWidth = MaxWidth, XMassTree = tree};
 		}
 
 		static public List<string> CreateBranch(int trunkWidth)
