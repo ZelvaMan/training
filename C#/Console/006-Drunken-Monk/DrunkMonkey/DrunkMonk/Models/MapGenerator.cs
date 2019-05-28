@@ -8,5 +8,11 @@ namespace DrunkMonkey.Models
 {
 	class MapGenerator
 	{
+		public void GenerateMap(Dificulty MapDificulty, int height, int width)
+		{
+			//Generatin.......
+			//................
+			//................
+		}
 	}
 }

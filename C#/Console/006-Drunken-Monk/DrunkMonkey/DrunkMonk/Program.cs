@@ -12,7 +12,7 @@ namespace DrunkMonkey
 		static void Main(string[] args)
 		{
 			Console.SetWindowPosition(0, 0);
-			var drawer = new Models.GameDrawer(100,225);
+			var drawer = new Models.GameDrawer();
 			drawer.Draw(null,new PositionStruct());
 			int i = 1214465464;
 

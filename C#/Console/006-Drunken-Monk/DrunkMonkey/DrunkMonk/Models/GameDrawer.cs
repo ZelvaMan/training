@@ -5,40 +5,40 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DrunkMonkey.Models
+namespace DrunkMonk.Models
 {
 	public class GameDrawer
 	{
-		private int Height, Width;
+		#region Constants
+
+		private const char PersonChar = 'O';
+		private const char PlayerChar = 'x';
+
+		#endregion
+		public int Height { private set; get; }
+		public int Width { private set; get; }
+		
 		/// <summary>
 		/// set Width and Height of Console
 		/// </summary>
 		/// <param name="height"></param>
 		/// <param name="width"></param>
-		public GameDrawer(int height, int width)
+		public GameDrawer()
 		{
 			Height = Console.WindowHeight;
 			Width = Console.WindowWidth;
 			Console.BufferHeight = Height;
 			Console.BufferWidth = Width;
-			/*
-			try
-			{
-				Console.SetBufferSize(width,height);
-				Console.SetWindowSize(width,height);
-			}
-			catch (Exception e)
-			{
-				MessageBox.Show($"Error, Cant set console size to {height}:{width}");
-
-			}
-			*/
 		}
 
 		public void Draw(int[,] Map, PositionStruct playerPositin)
 		{
+			Console.Clear();
 			Console.CursorVisible = false;
 			DrawMargin();
+			DrawMap(Map);
+			DrawAtPosition( playerPositin, ConsoleColor.Yellow, PlayerChar);
+			
 		}
 
 		#region Drawing Methods
@@ -84,7 +84,8 @@ namespace DrunkMonkey.Models
 						case 0:
 							break;
 						case 1:
-							DrawAtPosition(new PositionStruct(){Width = }, );
+							DrawAtPosition(new PositionStruct(Height, Width),ConsoleColor.White, PersonChar );
+							break;
 					}
 				}
 			}
